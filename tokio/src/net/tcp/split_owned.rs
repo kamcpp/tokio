@@ -216,6 +216,19 @@ impl OwnedWriteHalf {
         self.shutdown_on_drop = false;
         drop(self);
     }
+
+    pub fn shutdown_stream(&mut self) {
+        self.inner.shutdown(Shutdown::Both);
+    }
+}
+
+impl Clone for OwnedWriteHalf {
+    fn clone(&self) -> Self {
+        Self {
+            inner : self.inner.clone(),
+            shutdown_on_drop: self.shutdown_on_drop,
+        }
+    }
 }
 
 impl Drop for OwnedWriteHalf {
