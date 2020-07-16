@@ -54,7 +54,7 @@ pub struct OwnedReadHalf {
 #[derive(Debug)]
 pub struct OwnedWriteHalf {
     inner: Arc<TcpStream>,
-    shutdown_on_drop: bool,
+    pub shutdown_on_drop: bool,
 }
 
 pub(crate) fn split_owned(stream: TcpStream) -> (OwnedReadHalf, OwnedWriteHalf) {
